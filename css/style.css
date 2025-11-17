@@ -1,0 +1,581 @@
+/* css/style.css */
+
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #222 0, #050509 35%, #020204 100%);
+  color: #f9fafb;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================
+   RED NAVBAR — LOGO LEFT + MENU RIGHT
+   ============================ */
+
+.simple-nav {
+  width: 100%;
+  background: #b71c1c;
+  border-bottom: 3px solid #ff0000;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo span {
+  background: #ff0000;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.nav-menu a {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: 0.2s ease;
+}
+
+.nav-menu a:hover {
+  color: #ffe082;
+  transform: translateY(-2px);
+}
+
+.nav-icon {
+  width: 25px;
+  filter: brightness(0) invert(1);
+  transition: 0.2s;
+}
+
+.nav-icon:hover {
+  filter: invert(80%) sepia(90%) saturate(600%);
+}
+
+.hamburger {
+  display: none;
+  width: 32px;
+  filter: brightness(0) invert(1);
+  cursor: pointer;
+}
+
+/* ============================
+   MOBILE MENU
+   ============================ */
+
+@media(max-width: 800px) {
+
+  .hamburger {
+    display: block;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 85px;
+    right: 0;
+    width: 230px;
+    background: #b71c1c;
+    border-left: 3px solid #ff0000;
+    border-bottom: 3px solid #ff0000;
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px;
+    display: none;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .nav-menu a {
+    font-size: 20px;
+  }
+}
+
+/* ============================
+   MAIN SITE LAYOUT
+   ============================ */
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 2.5rem;
+}
+
+/* ============================
+   HERO SECTION (UPDATED)
+   ============================ */
+
+.hero {
+  display: grid;
+  grid-template-columns: 0.3fr 0.7fr;  /* LEFT TEXT — RIGHT IMAGE */
+  align-items: start;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .hero-carousel {
+    justify-self: center;
+    max-width: 360px;
+    margin-top: 1.5rem;
+  }
+}
+
+/* Align text block cleanly */
+.hero > div:first-child {
+  align-self: start;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.7rem;
+}
+
+.hero-highlight {
+  background: linear-gradient(120deg, #fed7aa, #f97316, #fb7185);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero-text {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  max-width: 500px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+}
+
+/* ============================
+   BUTTONS
+   ============================ */
+
+.btn-primary,
+.btn-outline {
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.18s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #f97316, #fb7185);
+  color: #111827;
+  font-weight: 600;
+  box-shadow: 0 12px 32px rgba(248, 113, 113, 0.45);
+}
+
+.btn-outline {
+  border: 1px solid rgba(156, 163, 175, 0.7);
+  color: #000001;
+}
+
+/* ============================
+   HERO CAROUSEL (RIGHT IMAGE)
+   ============================ */
+ 
+.hero-carousel {
+  position: relative;
+  overflow: visible;
+
+  /* Make it full width and auto height */
+  width: 100%;
+  height: auto;
+
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+
+  justify-self: end;
+  max-width: 100%;
+}
+
+.carousel-slide {
+  display: none;
+}
+
+.carousel-slide.active {
+  display: block;
+  width: 100%;
+}
+
+.carousel-cover {
+  width: 100%;
+  height: auto;          /* <— FIXED: No cropping */
+  object-fit: contain;   /* <— FIXED: Show full image */
+  border-radius: 0;
+  margin: 0;
+
+  transition: 0.4s ease;
+}
+.carousel-cover {
+  max-height: 800px;  /* adjust if needed */
+}
+
+
+/* Zoom effect (still works) */
+.hero-carousel:hover .carousel-cover {
+  transform: scale(1.05);
+  filter: brightness(0.9);
+}
+
+
+/* Zoom effect */
+.hero-carousel:hover .carousel-cover {
+  transform: scale(1.06);
+  filter: brightness(0.75);
+}
+
+/* Overlay */
+.hero-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.85));
+  border-radius: 24px;
+  opacity: 0;
+  transition: 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px;
+}
+
+.hero-carousel:hover .hero-hover-overlay {
+  opacity: 1;
+}
+
+.hero-overlay-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.hero-overlay-meta {
+  color: #ddd;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.hero-overlay-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-weight: 700;
+  width: fit-content;
+  transition: 0.25s ease;
+}
+
+.hero-overlay-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ============================
+   COMIC CARDS
+   ============================ */
+
+.comics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.comic-card {
+  background: radial-gradient(circle at top, rgba(248,113,113,0.08), transparent 60%), #020617;
+  border-radius: 18px;
+  padding: 0.7rem;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.9);
+  transition: 0.15s ease;
+}
+
+.comic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 1);
+}
+
+.comic-cover {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.comic-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.comic-meta {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+.comic-price {
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+/* ============================
+   CARD BUTTONS
+   ============================ */
+
+.card-actions .details-btn {
+  background: #fff;
+  color: #000;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: 0.25s ease;
+  border: 1px solid #ddd;
+}
+
+.card-actions .details-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(255,255,255,0.15);
+}
+
+.card-actions .add-btn {
+  background: linear-gradient(135deg, #f97316, #fb7185);
+  color: #000;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: 600;
+  border: none;
+  transition: 0.3s ease;
+}
+
+.card-actions .add-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(249, 115, 22, 0.5);
+  background: linear-gradient(135deg, #fb7185, #f97316);
+}
+
+/* ============================
+   FOOTER
+   ============================ */
+
+.site-footer {
+  background: #0a0a0a;
+  padding: 2.5rem 1.5rem 1.2rem;
+  margin-top: 4rem;
+  border-top: 2px solid #b71c1c;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.footer-logo {
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.footer-logo span {
+  background: #b71c1c;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.footer-text {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  max-width: 260px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-links a {
+  font-size: 1rem;
+  color: #ddd;
+  transition: 0.2s;
+}
+
+.footer-links a:hover {
+  color: #ff8a80;
+  transform: translateX(3px);
+}
+
+.footer-social {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-icon {
+  width: 26px;
+  filter: brightness(0) invert(1);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.footer-icon:hover {
+  filter: invert(60%) sepia(100%) saturate(600%);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 1.8rem;
+  padding-top: 1rem;
+  border-top: 1px solid #222;
+  color: #777;
+  font-size: 0.85rem;
+}
+
+@media(max-width: 700px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+
+/* ============================
+   CART PAGE FIX — IMAGE + LAYOUT
+   ============================ */
+
+/* Cart container (from your HTML/JS) */
+.cart-list {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+/* Cart item row layout */
+.cart-item {
+  background: #0d1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* FIXED — Comic image in cart */
+.cart-cover {
+  width: 90px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Comic info text */
+.cart-info-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cart-info-sub {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* Price + Remove button column */
+.cart-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+/* Quantity controls (optional if you have them) */
+.cart-qty {
+  display: flex;
+  gap: 6px;
+}
+
+.cart-qty button {
+  background: #b71c1c;
+  color: #fff;
+  border: none;
+  padding: 4px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.cart-qty button:hover {
+  background: #ff4d4d;
+}
+
+/* Remove button */
+.remove-btn {
+  background: transparent;
+  color: #ff5555;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+.remove-btn:hover {
+  color: #ff7777;
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ComicVerse Hub – Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="simple-nav">
+
+  <div class="nav-container">
+
+    <!-- Logo Left -->
+    <a href="index.html" class="nav-logo">
+      COMIC<span>VERSE</span>
+    </a>
+
+    <!-- Hamburger for Mobile -->
+    <img src="assets/icons/menu.svg" class="hamburger" id="hamburgerBtn">
+
+    <!-- Menu Right -->
+    <nav class="nav-menu" id="mobileMenu">
+
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+
+      <!-- Cart Icon -->
+      <a href="cart.html" class="icon-link">
+        <img src="assets/icons/cart.svg" class="nav-icon">
+      </a>
+
+      <!-- Search Icon -->
+      <a href="#" class="icon-link">
+        <img src="assets/icons/search.svg" class="nav-icon">
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+<main class="container">
+  <div class="section-header">
+    <div>
+      <h1 class="section-title">Your Cart</h1>
+      <p class="section-sub">All cart state is stored using localStorage for a realistic e-commerce feel.</p>
+    </div>
+  </div>
+
+  <div id="cart-items" class="cart-list"></div>
+
+  <div class="cart-total" id="cart-summary" style="display:none;">
+    <div class="section-sub">Total:</div>
+    <div style="text-align:right;">
+      <div id="cart-total-amount" class="section-title"></div>
+      <button class="btn-primary" style="margin-top:0.4rem;">Checkout (Simulated)</button>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <div class="footer-left">
+      <h2 class="footer-logo">COMIC<span>VERSE</span></h2>
+      <p class="footer-text">Your multiverse gateway to Marvel, DC and indie comics.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="cart.html">Cart</a>
+    </div>
+
+    <div class="footer-social">
+      <img src="assets/icons/facebook.svg" class="footer-icon">
+      <img src="assets/icons/instagram.svg" class="footer-icon">
+      <img src="assets/icons/twitter.svg" class="footer-icon">
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 ComicVerse Hub. All rights reserved.
+  </div>
+</footer>
+
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script>
+// Simple cart rendering for cart page
+
+const cartRoot = document.getElementById("cart-items");
+const cartSummary = document.getElementById("cart-summary");
+const cartTotalAmount = document.getElementById("cart-total-amount");
+
+function renderCartPage() {
+  const cart = getCart();
+  cartRoot.innerHTML = "";
+
+  if (!cart.length) {
+    cartRoot.innerHTML = "<p class='section-sub'>Your cart is empty. Add some comics from the Browse page.</p>";
+    cartSummary.style.display = "none";
+    return;
+  }
+
+  cartSummary.style.display = "flex";
+
+  cart.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "cart-item";
+    row.innerHTML = `
+      <div>
+        <img src="${item.cover}" alt="${item.title}" class="cart-cover">
+      </div>
+      <div>
+        <div class="cart-title">${item.title}</div>
+        <div class="cart-meta">₹${item.price} each</div>
+        <label class="cart-meta">
+          Qty:
+          <input type="number" min="1" value="${item.qty}" class="qty-input" data-id="${item.id}">
+        </label>
+      </div>
+      <div style="text-align:right;">
+        <div class="cart-meta">Subtotal:</div>
+        <div class="comic-price">₹${item.price * item.qty}</div>
+        <button class="btn-outline" data-remove="${item.id}" style="margin-top:0.4rem;">Remove</button>
+      </div>
+    `;
+    cartRoot.appendChild(row);
+  });
+
+  cartTotalAmount.textContent = "₹" + calcCartTotal();
+}
+
+if (cartRoot) {
+  renderCartPage();
+
+  cartRoot.addEventListener("change", e => {
+    if (e.target.matches(".qty-input")) {
+      const id = Number(e.target.dataset.id);
+      const qty = Number(e.target.value);
+      updateCartQty(id, qty);
+      renderCartPage();
+    }
+  });
+
+  cartRoot.addEventListener("click", e => {
+    if (e.target.dataset.remove) {
+      const id = Number(e.target.dataset.remove);
+      removeFromCart(id);
+      renderCartPage();
+    }
+  });
+}
+</script>
+</body>
+</html>

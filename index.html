@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ComicVerse Hub – Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="simple-nav">
+  <div class="nav-container">
+
+    <!-- Logo Left -->
+    <a href="index.html" class="nav-logo">
+      COMIC<span>VERSE</span>
+    </a>
+
+    <!-- Hamburger for Mobile -->
+    <img src="assets/icons/menu.svg" class="hamburger" id="hamburgerBtn">
+
+    <!-- Menu Right -->
+    <nav class="nav-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+
+      <!-- Cart Icon -->
+      <a href="cart.html" class="icon-link">
+        <img src="assets/icons/cart.svg" class="nav-icon">
+      </a>
+
+      <!-- Search Icon -->
+      <a href="#" class="icon-link">
+        <img src="assets/icons/search.svg" class="nav-icon">
+      </a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <!-- ============================
+       HERO SECTION (FIXED)
+       ============================ -->
+  <section class="hero">
+
+    <!-- LEFT SIDE TEXT -->
+    <div>
+      <h1 class="hero-title">
+        Dive into the <span class="hero-highlight">Multiverse of Comics</span>
+      </h1>
+
+      <p class="hero-text">
+        Explore a curated hub of Marvel, DC and indie titles. 
+        Filter, browse and simulate your dream comic collection — all in a single static front-end experience.
+      </p>
+
+      <div class="hero-actions">
+        <a href="browse.html"><button class="btn-primary">Browse All Comics →</button></a>
+        <a href="cart.html"><button class="btn-outline">View Cart</button></a>
+      </div>
+
+      <!-- FIX: Properly closed meta container -->
+      <div class="hero-meta"></div>
+    </div>
+
+    <!-- RIGHT SIDE IMAGE -->
+    <div class="hero-carousel">
+      <div id="carousel-slides"></div>
+      <div class="carousel-dots" id="carousel-dots"></div>
+    </div>
+
+  </section>
+
+
+  <!-- ============================
+       NEW RELEASES SECTION
+       ============================ -->
+  <section>
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">New Releases</h2>
+        <p class="section-sub">A quick peek at some of the latest titles in ComicVerse.</p>
+      </div>
+      <a href="browse.html" class="section-sub">View all →</a>
+    </div>
+
+    <div id="home-comics" class="comics-grid"></div>
+  </section>
+
+</main>
+
+
+<!-- ============================
+     FOOTER
+     ============================ -->
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <div class="footer-left">
+      <h2 class="footer-logo">COMIC<span>VERSE</span></h2>
+      <p class="footer-text">Your multiverse gateway to Marvel, DC and indie comics.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="browse.html">Browse</a>
+      <a href="cart.html">Cart</a>
+    </div>
+
+    <div class="footer-social">
+      <img src="assets/icons/facebook.svg" class="footer-icon">
+      <img src="assets/icons/instagram.svg" class="footer-icon">
+      <img src="assets/icons/twitter.svg" class="footer-icon">
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 ComicVerse Hub. All rights reserved.
+  </div>
+</footer>
+
+
+<!-- ============================
+     SCRIPTS
+     ============================ -->
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+  const btn = document.getElementById("hamburgerBtn");
+  const menu = document.getElementById("mobileMenu");
+
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("active");
+  });
+</script>
+
+</body>
+</html>
